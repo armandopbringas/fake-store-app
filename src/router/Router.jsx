@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect} from 'react';
 import {
   BrowserRouter,
   Route,
@@ -13,10 +13,23 @@ import Home from '../pages/Home';
 
 function AppRouter() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [token, setToken] = useState(false);
 
-  const handleLogin = () => setIsAuthenticated(true);
+  if(token) {
+    sessionStorage.setItem('token',JSON.stringify(token));
+  }
 
-  const handleLogout = () => setIsAuthenticated(false);
+  useEffect(() => {
+    if(sessionStorage.getItem('token')) {
+      let data = JSON.parse(sessionStorage.getItem('token'));
+      setToken(data);
+    }
+  }, []);
+
+  // function handleLogout(){
+  //   sessionStorage.removeItem('token')
+  //   navigate('/')
+  // }
 
   return (
     <BrowserRouter>
@@ -31,11 +44,11 @@ function AppRouter() {
           <li>
             <Link to="/login">Login</Link>
           </li>
-          {isAuthenticated ? (
+          {/* {sessionStorage.getItem('token') ? (
             <li>
               <button onClick={handleLogout}>Logout</button>
             </li>
-          ) : null}
+          ) : null} */}
         </ul>
       </nav>
       <Routes>
@@ -43,20 +56,12 @@ function AppRouter() {
         <Route path="/signup" element={<SignUp />} />
         <Route
           path="/login"
-          element={<LogIn onLogin={handleLogin} isAuthenticated={isAuthenticated} />}
+          element={<LogIn setToken={setToken} />}
         />
-        <Route path="/home" element={<PrivateRoute isAuthenticated={isAuthenticated} />} />
+        {token ? <Route path="/home" element={<Home token={token} />} /> : ""}
       </Routes>
     </BrowserRouter>
   );
-}
-
-function PrivateRoute({ isAuthenticated }) {
-  if (isAuthenticated) {
-    return <Home />;
-  } else {
-    return <Navigate to="/login" />;
-  }
 }
 
 export default AppRouter;

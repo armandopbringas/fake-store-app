@@ -28,7 +28,7 @@ function SignUp() {
           }
         }
       )
-      console.log('Check your email for verification linik')
+      console.log('Check your email for verification link')
     } catch (error) {
       console.log(error)
     }
