@@ -4,7 +4,6 @@ import {
   Route,
   Routes,
   Link,
-  Navigate,
 } from 'react-router-dom';
 import Landing from '../pages/Landing';
 import SignUp from '../pages/SignUp';
@@ -22,10 +21,10 @@ const AppRouter = () => {
   }, []);
 
   const handleLogout = () => {
-    console.log('clicked');
+    // Limpiar el token del estado y del sessionStorage
+    setToken(false);
     sessionStorage.removeItem('token');
-    return <Navigate to="/" replace />;
-  }
+  };
 
   return (
     <BrowserRouter>
@@ -35,20 +34,24 @@ const AppRouter = () => {
             <Link to="/">Logo</Link>
           </li>
           {token && (
-            <li>
-              <Link to="/home">Home</Link>
-            </li>
+            <>
+              <li>
+                <Link to="/home">Home</Link>
+              </li>
+              <li>
+                <button onClick={handleLogout}>Logout</button>
+              </li>
+            </>
           )}
-          <li>
-            <Link to="/signup">Signup</Link>
-          </li>
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-          {token && (
-            <li>
-              <button onClick={() => handleLogout()}>Logout</button>
-            </li>
+          {!token && (
+            <>
+              <li>
+                <Link to="/signup">Signup</Link>
+              </li>
+              <li>
+                <Link to="/login">Login</Link>
+              </li>
+            </>
           )}
         </ul>
       </nav>
