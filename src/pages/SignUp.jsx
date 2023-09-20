@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { supabase } from '../../client';
 
-function SignUp() {
+const SignUp = () => {
   const [formData, setFormData] = useState({
     fullname: '',
     email: '',
@@ -29,6 +29,7 @@ function SignUp() {
         }
       )
       console.log('Check your email for verification link')
+      return <Navigate to="/home" />; 
     } catch (error) {
       console.log(error)
     }

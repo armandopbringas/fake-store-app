@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter,
   Route,
@@ -11,25 +11,21 @@ import SignUp from '../pages/SignUp';
 import LogIn from '../pages/LogIn';
 import Home from '../pages/Home';
 
-function AppRouter() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+const AppRouter = () => {
   const [token, setToken] = useState(false);
 
-  if(token) {
-    sessionStorage.setItem('token',JSON.stringify(token));
-  }
-
   useEffect(() => {
-    if(sessionStorage.getItem('token')) {
+    if (sessionStorage.getItem('token')) {
       let data = JSON.parse(sessionStorage.getItem('token'));
       setToken(data);
     }
   }, []);
 
-  // function handleLogout(){
-  //   sessionStorage.removeItem('token')
-  //   navigate('/')
-  // }
+  const handleLogout = () => {
+    console.log('clicked');
+    sessionStorage.removeItem('token');
+    return <Navigate to="/" replace />;
+  }
 
   return (
     <BrowserRouter>
@@ -38,17 +34,22 @@ function AppRouter() {
           <li>
             <Link to="/">Logo</Link>
           </li>
+          {token && (
+            <li>
+              <Link to="/home">Home</Link>
+            </li>
+          )}
           <li>
             <Link to="/signup">Signup</Link>
           </li>
           <li>
             <Link to="/login">Login</Link>
           </li>
-          {/* {sessionStorage.getItem('token') ? (
+          {token && (
             <li>
-              <button onClick={handleLogout}>Logout</button>
+              <button onClick={() => handleLogout()}>Logout</button>
             </li>
-          ) : null} */}
+          )}
         </ul>
       </nav>
       <Routes>
@@ -58,7 +59,9 @@ function AppRouter() {
           path="/login"
           element={<LogIn setToken={setToken} />}
         />
-        {token ? <Route path="/home" element={<Home token={token} />} /> : ""}
+        {token && (
+          <Route path="/home" element={<Home token={token} />} />
+        )}
       </Routes>
     </BrowserRouter>
   );

@@ -3,7 +3,7 @@ import { Link, useNavigate} from 'react-router-dom';
 import { supabase } from '../../client';
 
 const LogIn = ({ setToken }) => {
-  let navigate = useNavigate()
+  let navigate = useNavigate();
 
   const [formData, setFormData] = useState({
         email:'', password:''

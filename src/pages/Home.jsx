@@ -1,18 +1,17 @@
-import { useNavigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom';
 
 const Home = ({ token }) => {
-  const navigate = useNavigate()
-  
-  function handleLogout(){
-    sessionStorage.removeItem('token')
-    navigate('/')
+  const handleLogout = () => {
+    console.log('clicked');
+    sessionStorage.removeItem('token');
+    // Utiliza Navigate para redirigir a la página principal después de cerrar sesión
+    return <Navigate to="/" replace />;
   }
 
   return (
     <div>
       <h3>Welcome back, {token.user.user_metadata.full_name}</h3>
       <button onClick={handleLogout}>Logout</button>
-
     </div>
   )
 }
