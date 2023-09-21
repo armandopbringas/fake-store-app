@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate} from 'react-router-dom';
 import { supabase } from '../../client';
 
 const SignUp = () => {
+  let navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     fullname: '',
     email: '',
@@ -29,9 +32,9 @@ const SignUp = () => {
         }
       )
       console.log('Check your email for verification link')
-      return <Navigate to="/home" />; 
+      navigate('/login');
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 

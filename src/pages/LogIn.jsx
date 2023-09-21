@@ -5,9 +5,7 @@ import { supabase } from '../../client';
 const LogIn = ({ setToken }) => {
   let navigate = useNavigate();
 
-  const [formData, setFormData] = useState({
-        email:'', password:''
-  });
+  const [formData, setFormData] = useState({email:'', password:''});
 
   function handleChange(event) {
     setFormData((prevFormData) => {
@@ -19,7 +17,7 @@ const LogIn = ({ setToken }) => {
   }
 
   async function handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
 
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
@@ -28,7 +26,7 @@ const LogIn = ({ setToken }) => {
       })
       if (error) throw error
       setToken(data);
-      navigate('/home')
+      navigate('/home');
     } catch (error) {
       console.log(error)
     }
