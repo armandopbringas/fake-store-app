@@ -1,38 +1,36 @@
-import React, { useState } from 'react';
-import { useNavigate} from 'react-router-dom';
-import { supabase } from '../../client';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { supabase } from "../../client";
 
 const SignUp = () => {
   let navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    fullname: '',
-    email: '',
-    password: '',
+    fullname: "",
+    email: "",
+    password: "",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({...formData, [name]: value});
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const { data, error } = await supabase.auth.signUp(
-        {
-          email: formData.email,
-          password: formData.password,
-          options: {
-            data: {
-              full_name: formData.fullname,
-            }
-          }
-        }
-      )
-      console.log('Check your email for verification link')
-      navigate('/login');
+      const { data, error } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+        options: {
+          data: {
+            full_name: formData.fullname,
+          },
+        },
+      });
+      console.log("Check your email for verification link");
+      navigate("/login");
     } catch (error) {
       console.log(error);
     }
@@ -79,6 +77,6 @@ const SignUp = () => {
       </form>
     </div>
   );
-}
+};
 
 export default SignUp;
