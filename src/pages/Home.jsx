@@ -8,7 +8,6 @@ const Home = ({ token }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
-    // Realiza una solicitud a la Fake Store API para obtener todos los productos
       async function fetchProducts() {
         try {
           const response = await axios.get('https://fakestoreapi.com/products');
@@ -23,7 +22,6 @@ const Home = ({ token }) => {
   }, []);
 
   useEffect(() => {
-    // Filtra los productos por nombre o categoría
     const filtered = products.filter(
       (product) =>
         product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -43,7 +41,6 @@ const Home = ({ token }) => {
         onChange={(e) => setSearchTerm(e.target.value)}
       />
       <div>
-        {/* Renderiza los productos filtrados */}
         {filteredProducts.map((product) => (
           <div key={product.id}>
             <Link to={`/product/${product.id}`}>
