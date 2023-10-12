@@ -1,56 +1,10 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
+import React from "react";
 
-const Home = ({ token }) => {
-  const [products, setProducts] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filteredProducts, setFilteredProducts] = useState([]);
-
-  useEffect(() => {
-      async function fetchProducts() {
-        try {
-          const response = await axios.get('https://fakestoreapi.com/products');
-          setProducts(response.data);
-          setFilteredProducts(response.data);
-        } catch (error) {
-          console.error('Error al obtener los productos:', error);
-        }
-      }
-
-      fetchProducts();
-  }, []);
-
-  useEffect(() => {
-    const filtered = products.filter(
-      (product) =>
-        product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        product.category.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setFilteredProducts(filtered);
-  }, [searchTerm, products]);
-
+const Home = () => {
   return (
     <div>
       <h2>Home Page</h2>
       <p>Welcome {token.user.user_metadata.full_name}</p>
-      <input
-        type="text"
-        placeholder="Buscar productos por nombre o categoría"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
-      <div>
-        {filteredProducts.map((product) => (
-          <div key={product.id}>
-            <Link to={`/product/${product.id}`}>
-              <h3>{product.title}</h3>
-            </Link>
-            <p>{product.category}</p>
-            <img src={product.image} alt="product" width={100} />
-          </div>
-        ))}
-      </div>
     </div>
   );
 };
