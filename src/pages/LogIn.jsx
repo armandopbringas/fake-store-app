@@ -18,14 +18,15 @@ const LogIn = ({ setToken }) => {
 
   async function handleSubmit(e) {
     e.preventDefault();
-
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
         email: formData.email,
         password: formData.password,
       });
       if (error) throw error;
-      setToken(data);
+      if (data) {
+        sessionStorage.setItem("token", JSON.stringify(data));
+      }
       navigate("/home");
     } catch (error) {
       console.log(error);
