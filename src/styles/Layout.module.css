@@ -1,0 +1,10 @@
+@tailwind base; 
+@tailwind components;
+@tailwind utilities;
+
+.Box {
+  @apply
+  m-auto
+  py-10
+  max-w-3xl
+}
