@@ -16,21 +16,28 @@ const AppRouter = () => {
     }
   }, []);
 
-  const PrivateRoute = ({ element, token }) => {
-    return token ? element : <Navigate to="/login" />;
-  };
-
   return (
     <BrowserRouter>
       <Layout token={token} setToken={setToken}>
         <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/login" element={<LogIn setToken={setToken} />} />
+          <Route
+            path="/"
+            element={token ? <Navigate to="/home" /> : <Landing />}
+          />
+          <Route
+            path="/signup"
+            element={token ? <Navigate to="/home" /> : <SignUp />}
+          />
+          <Route
+            path="/login"
+            element={
+              token ? <Navigate to="/home" /> : <LogIn setToken={setToken} />
+            }
+          />
           <Route
             path="/home"
             element={
-              <PrivateRoute element={<Home token={token} />} token={token} />
+              token ? <Home token={token} /> : <Navigate to="/login" />
             }
           />
         </Routes>
