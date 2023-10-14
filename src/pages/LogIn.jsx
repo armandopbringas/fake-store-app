@@ -26,8 +26,9 @@ const LogIn = ({ setToken }) => {
       if (error) throw error;
       if (data) {
         sessionStorage.setItem("token", JSON.stringify(data));
+        setToken(data);
+        navigate("/home");
       }
-      navigate("/home");
     } catch (error) {
       console.log(error);
     }
