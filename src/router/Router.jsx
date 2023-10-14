@@ -20,8 +20,7 @@ const AppRouter = () => {
   return (
     <BrowserRouter>
       <div>
-        {token && (<NavLoged setToken={setToken} />)}
-        {!token && (<Nav />)}
+        {!token ? (<Nav />) : (<NavLoged setToken={setToken} />)}
       </div>
       <Routes>
         <Route path="/" element={<Landing />} />
