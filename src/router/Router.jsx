@@ -5,6 +5,7 @@ import SignUp from "../pages/SignUp";
 import LogIn from "../pages/LogIn";
 import Home from "../pages/Home";
 import Layout from "../components/Layout/Layout";
+import NotFound from "../pages/NotFound";
 
 const AppRouter = () => {
   const [token, setToken] = useState(false);
@@ -40,6 +41,7 @@ const AppRouter = () => {
               token ? <Home token={token} /> : <Navigate to="/login" />
             }
           />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>
     </BrowserRouter>

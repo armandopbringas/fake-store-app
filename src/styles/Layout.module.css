@@ -1,10 +1,31 @@
-@tailwind base; 
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 .Box {
-  @apply
-  m-auto
+  @apply m-auto
   py-10
-  max-w-3xl
+  max-w-3xl;
+}
+
+.BoxCenterd {
+  @apply 
+  flex
+  flex-col
+  items-center
+  justify-center;
+}
+
+.FormBox {
+  @apply 
+  flex
+  flex-col
+  items-center
+  justify-center
+  w-2/4
+  rounded-lg 
+  bg-white
+  p-6
+  shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]
+  dark:bg-neutral-700;
 }

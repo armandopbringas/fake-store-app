@@ -1,10 +1,10 @@
 import React from "react";
+import module from "../styles/Layout.module.css"
 
 const Home = ({ token }) => {
   return (
-    <div>
-      <h2>Home Page</h2>
-      <p>Welcome {token.user.user_metadata.full_name}</p>
+    <div className={module.BoxCentered}>
+      <p>Welcome to  The Fake Store {token.user.user_metadata.full_name}</p>
     </div>
   );
 };
