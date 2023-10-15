@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { MdLocalGroceryStore } from "react-icons/md";
 
 const Nav = () => {
   return (
@@ -11,7 +12,10 @@ const Nav = () => {
         }}
       >
         <div>
-          <Link to="/">Logo</Link>
+          <Link to="/" className="flex items-center gap-2">
+            <MdLocalGroceryStore size={24} />
+            <h3 className="text-xl font-medium leading-tight">The Fake Store</h3>
+          </Link>
         </div>
         <div style={{ display: "flex", gap: "1rem" }}>
           <Link to="/signup">Signup</Link>
